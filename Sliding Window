@@ -14,7 +14,7 @@ public:
     {
         arr = new int[capacity];
     }
-
+//destructor
     ~CircularQueue()
     {
         delete[] arr;
