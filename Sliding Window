@@ -1,0 +1,148 @@
+#include <iostream>
+
+class CircularQueue
+{
+private:
+    int *arr;
+    int front;
+    int rear;
+    int capacity;
+    int size;
+
+public:
+    CircularQueue(int capacity) : front(0), rear(-1), capacity(capacity), size(0)
+    {
+        arr = new int[capacity];
+    }
+
+    ~CircularQueue()
+    {
+        delete[] arr;
+    }
+
+    bool isEmpty() const
+    {
+        return size == 0;
+    }
+
+    bool isFull() const
+    {
+        return size == capacity;
+    }
+
+    int getSize() const
+    {
+        return size;
+    }
+
+    void enqueue(int data)
+    {
+        if (isFull())
+        {
+            std::cout << "Queue is full. Cannot enqueue." << std::endl;
+            return;
+        }
+
+        rear = (rear + 1) % capacity;
+        arr[rear] = data;
+        size++;
+    }
+
+    void dequeue()
+    {
+        if (isEmpty())
+        {
+            std::cout << "Queue is empty. Cannot dequeue." << std::endl;
+            return;
+        }
+
+        front = (front + 1) % capacity;
+        size--;
+    }
+
+    int getFront() const
+    {
+        if (isEmpty())
+        {
+            std::cout << "Queue is empty." << std::endl;
+            throw std::runtime_error("Queue is empty.");
+        }
+
+        return arr[front];
+    }
+
+    int getRear() const
+    {
+        if (isEmpty())
+        {
+            std::cout << "Queue is empty." << std::endl;
+            throw std::runtime_error("Queue is empty.");
+        }
+
+        return arr[rear];
+    }
+};
+
+class SlidingWindowMaxFinder
+{
+private:
+    CircularQueue window;
+    int k;
+
+public:
+    SlidingWindowMaxFinder(int k) : window(k), k(k) {}
+
+    void findMaxInSlidingWindow(const int arr[], int n)
+    {
+        if (arr == nullptr || n == 0 || k <= 0 || k > n)
+        {
+            std::cout << "Invalid input." << std::endl;
+            return;
+        }
+
+        // Process the first k elements to initialize the window
+        for (int i = 0; i < k; ++i)
+        {
+            while (!window.isEmpty() && arr[i] >= arr[window.getRear()])
+            {
+                window.dequeue();
+            }
+            window.enqueue(i);
+        }
+
+        // Process the rest of the elements to find maximum in sliding windows
+        for (int i = k; i < n; ++i)
+        {
+            std::cout << arr[window.getFront()] << " ";
+
+            // Remove elements that are not part of the current window
+            while (!window.isEmpty() && window.getFront() <= i - k)
+            {
+                window.dequeue();
+            }
+
+            // Remove elements that are not useful and are smaller than the current element
+            while (!window.isEmpty() && arr[i] >= arr[window.getRear()])
+            {
+                window.dequeue();
+            }
+
+            window.enqueue(i);
+        }
+
+        std::cout << arr[window.getFront()] << std::endl;
+    }
+};
+
+int main()
+{
+    int arr[] = {4, 3, 1, 5, 6, 7, 8, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 3;
+
+    SlidingWindowMaxFinder maxFinder(k);
+    std::cout << "Maximum elements in sliding windows of size " << k << ": ";
+    maxFinder.findMaxInSlidingWindow(arr, n);
+
+    return 0;
+}
