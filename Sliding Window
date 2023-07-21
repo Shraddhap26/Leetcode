@@ -1,5 +1,4 @@
 #include <iostream>
-
 class CircularQueue
 {
 private:
@@ -8,7 +7,6 @@ private:
     int rear;
     int capacity;
     int size;
-
 public:
     CircularQueue(int capacity) : front(0), rear(-1), capacity(capacity), size(0)
     {
