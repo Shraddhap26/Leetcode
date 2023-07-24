@@ -17,6 +17,7 @@ Output: 2
 Explanation: Since 2 is neither the maximum nor the minimum value in nums, it is the only valid answer. 
 
 
+ Program :
 class Solution {
 public:
     int findNonMinOrMax(vector<int>& nums) {
