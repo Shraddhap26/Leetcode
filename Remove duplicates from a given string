@@ -1,5 +1,33 @@
-//here first we decalre method and after that called it. but without function also we can do it
+//without using function
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main(){
+    string s1="ffgguujjhhssffggdhhdjhf";
+    int i,j;
+    int index=0;
+    string s2;
+    int len=s1.length();
+    for(i=0;i<len;i++){
+         for(j=0;j<len;j++){
+        if(s1[i]==s1[j]){
+            break;
+        }
+    }
+    if(i==j){
+        s2+=s1[i];
+    }
+    }
+    cout<<s2;
+    return 0;
+}
 
+//OUTPUT :
+fgujhsd
+
+
+
+//here first we decalre method and after that called it. but without function also we can do it
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -34,3 +62,6 @@ int n = sizeof(str) / sizeof(str[0]);
 cout << removeDuplicate(str, n);
 return 0;
 }
+
+
+//YouTube link :- https://youtu.be/rcoVdc1LAeA
