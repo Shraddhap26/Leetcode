@@ -1,4 +1,4 @@
-
+//here first we decalre method and after that called it. but without function also we can do it
 
 #include <bits/stdc++.h>
 using namespace std;
