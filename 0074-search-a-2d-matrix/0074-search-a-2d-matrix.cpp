@@ -8,7 +8,9 @@ public:
         int mid=start+(end-start)/2;
 
         while(start<=end){
-            int element=matrix[mid/col][mid%col];
+            int element=matrix[mid/col][mid%col]; //here we are taking column size
+                                                  //first to get row index of mid element we performed division 
+                                                   //sencond to get column index of mid element we performed modulus
             if(element==target){
                 return true;
             }else if(element<target){
