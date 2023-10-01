@@ -15,12 +15,15 @@ public:
         
 
         while(count<total){
+            //Print Starting row
             for(int index=startcol; count < total && index <= endcol;index++){
                 arr.push_back(matrix[startrow][index]);
                 count++;
             }
             startrow++;
 
+
+             //Print ending column
              for(int index=startrow; count < total && index <= endrow;index++){
                 arr.push_back(matrix[index][endcol]);
                 count++;
@@ -28,12 +31,15 @@ public:
             endcol--;
             
 
+             //Print ending row
              for(int index=endcol;count < total && index >=startcol;index--){
                 arr.push_back(matrix[endrow][index]);
                 count++;
             }
             endrow--;
 
+
+             //Print Starting column
              for(int index=endrow ; count<total && index>=startrow ;index--){
                 arr.push_back(matrix[index][startcol]);
                 count++;
